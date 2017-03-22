@@ -1,0 +1,51 @@
+---
+- hosts: webservers
+  become: yes
+  vars:
+    http_port: 8090
+    doc_dir: /ansible/
+    doc_root: /var/www/html/ansible/
+    max_clients: 25
+    
+  vars_prompt:
+    - name: username
+      prompt: What is your name geek?
+
+  
+  tasks:
+   - name: Ensure Apache installed
+     yum: name=httpd state=present
+     when: ansible_os_family=='RedHat'
+
+   - name: Ensure Apache installed
+     apt: name=apache2 state=present
+     when: ansible_os_family=='Debian'
+
+   - name: Ensure Apache is running
+     service: name=httpd enabled=yes state=started
+
+   - name: Create ansible directory in document root directory
+     file: path=/var/www/html/ansible state=directory
+
+   - name: Deploy httpd.conf file
+     template: src=templates/httpd.j2 dest=/etc/httpd/conf/httpd.conf
+     notify:
+      - Restart Apache
+
+   - name: Copy Site Files
+     template: src=templates/index.j2 dest={{doc_root}}/index.html mode=0644
+
+
+   - name: Stop IPTABLES Now!!
+     service: name=iptables state=stopped
+
+
+  handlers:
+    - name: Restart Apache
+      service: name=httpd state=restarted
+  
+
+
+
+
+

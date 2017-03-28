@@ -7,3 +7,9 @@ https://www.postjobfree.com/resume/acyvf9/aws-chef-ruby-python-jira-cloud-tampa-
 http://frederic-wou.net/install-geppetto-on-ubuntu/
 
 http://www.example42.com/tutorials/PuppetTutorial/#slide-9
+
+https://www.edureka.co/blog/puppet-tutorial/
+
+https://www.upguard.com/getting-started-with-puppet-labs
+
+https://www.linode.com/docs/applications/puppet/install-and-configure-puppet#before-you-begin
